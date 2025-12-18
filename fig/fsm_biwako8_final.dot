@@ -1,0 +1,25 @@
+digraph FSM {
+    rankdir=LR;                 // 横向き
+    fontsize=12;
+    node [shape=box, style=rounded, fontsize=11];
+    edge [fontsize=10];
+
+    Start [label="Mission Start", shape=oval];
+    Travel [label="TRAVEL\nWaypoint Traveling"];
+    Keep   [label="KEEP\nStation Keeping"];
+    End    [label="Mission End", shape=oval];
+
+    Start -> Travel;
+
+    Travel -> Keep
+        [label="distance ≤ 1.5 m"];
+
+    Keep -> Travel
+        [label="5 min elapsed\nnext waypoint"];
+
+    Keep -> Keep
+        [label="distance > 1.5 m\nrecovery"];
+
+    Travel -> End
+        [label="lap > 3"];
+}
