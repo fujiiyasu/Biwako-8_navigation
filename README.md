@@ -48,10 +48,10 @@ python3 servo_gui_server.py
 ip addr show wlan0
 ```
 
-ブラウザで以下にアクセス（ポート5001）：
+ブラウザで以下にアクセス：
 
 ```
-http://<ロボットのIPアドレス>:5001/
+http://<ロボットのIPアドレス>:<PORT>/
 ```
 
 > BlueOSのデフォルト（ポート80）とは別ポートなので競合しない。
@@ -238,8 +238,8 @@ python3 servo_mode_selector.py
 
 ```csv
 lat,lon
-34.806898,135.561439
-34.806894,135.561327
+34.xxxxxx,135.xxxxxx
+34.oooooo,135.oooooo
 ...
 ```
 
@@ -252,7 +252,7 @@ Google マップ等で緯度・経度を取得して記入する。現在は4点
 ### サーボ値を調整したい
 
 1. `python3 servo_gui_server.py` を起動
-2. ブラウザで `http://<IP>:5001/` にアクセス
+2. ブラウザで `http://<IP>:<PORT>/` にアクセス
 3. スライダーやボタンでPWM値を調整 → `SEND` で確認
 4. `SAVE TO CSV` で保存
 
@@ -262,20 +262,3 @@ Google マップ等で緯度・経度を取得して記入する。現在は4点
 2. `biwako8_fsm_navigation.py` の `EXPERIMENT_MODE` を設定
 3. `python3 biwako8_fsm_navigation.py` を実行
 4. ログは `robot_log_<MODE>_<timestamp>.csv` に自動保存
-
-### DNSが使えずpipが失敗する場合
-
-```bash
-echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
-pip install flask
-```
-
-### git管理メモ
-
-```bash
-# servo_positions.csv の変更追跡を無効化（値は保持）
-git update-index --assume-unchanged servo_positions.csv
-
-# 無効化を解除する場合
-git update-index --no-assume-unchanged servo_positions.csv
-```
