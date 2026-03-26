@@ -10,7 +10,8 @@ biwako8_navigation/
 ├── waypoints.csv                 # ウェイポイント一覧
 ├── navigation_test.py            # ナビゲーションテスト
 ├── station_keeping_nav_test.py   # 定点維持ナビゲーションテスト
-├── station_keeping_thruster_test.py  # スラスタ手動テスト（定点維持）
+├── station_keeping_thruster_test.py      # スラスタ手動テスト（定点維持）
+├── station_keeping_thruster_test_app.py  # スラスタ方向テスト（ブラウザUI付き）
 ├── straight_nav_test.py          # 直進移動ナビゲーションテスト（PD制御）
 ├── straight_thruster_test.py     # スラスタ手動テスト（直進移動）
 ├── open_close_test.py            # サーボOPEN/CLOSEテスト
@@ -198,6 +199,32 @@ python3 station_keeping_thruster_test.py
 ```
 
 コマンド：`1`=前進 / `2`=後退 / `3`=右回転 / `4`=左回転 / `0`=停止 / `q`=終了
+
+---
+
+#### `station_keeping_thruster_test_app.py` — スラスタ方向テスト（ブラウザUI付き）
+
+ブラウザから移動方向・強度を指定してスラスタを動作させるWebアプリ。
+rc4（Yaw）・rc5（Surge）・rc6（Sway）の3チャンネルを操作でき、前後左右・斜め4方向・旋回の計12方向をプリセットから選択できる。
+斜め方向は合成推力が前後左右と等しくなるよう1/√2に正規化済み。
+
+```bash
+python3 station_keeping_thruster_test_app.py
+```
+
+ブラウザで以下にアクセス：
+
+```
+http://<ロボットのIPアドレス>:5002/
+```
+
+| 操作 | 方法 |
+|------|------|
+| 前後・横移動 | ジョイスティックをドラッグ |
+| 旋回 | Yaw スライダー |
+| 強度調整 | Intensity スライダー（0〜1.0） |
+| 方向プリセット | 各方向ボタン（同じボタンを再度押すと停止） |
+| 緊急停止 | STOP ボタン |
 
 ---
 
