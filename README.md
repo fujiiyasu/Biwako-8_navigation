@@ -163,10 +163,31 @@ python3 navigation_test.py
 
 #### `station_keeping_nav_test.py` — 定点維持ナビゲーションテスト
 
-定点維持モードのスラスタ制御（FORWARD/BACKWARD/LEFT/RIGHT）でウェイポイントを巡回。
+定点維持モードの機体形状でウェイポイントを巡回する。`--mode` オプションで制御則を切り替えられる。
+
+| モード | 内容 |
+|--------|------|
+| `4dir`（デフォルト） | 前後左右の4方向離散制御（rc5/rc6） |
+| `8dir` | 斜め4方向を加えた8方向離散制御（rc5/rc6、斜めは1/√2正規化済み） |
+| `yaw`  | straight-travelと同じPD制御（rc4=yaw, rc5=surge） |
 
 ```bash
-python3 station_keeping_nav_test.py
+# 4方向（デフォルト）
+python3 station_keeping_nav_test.py --mode 4dir
+
+# 8方向
+python3 station_keeping_nav_test.py --mode 8dir
+
+# 旋回あり（straight-travelと同制御則、機体形状のみ異なる）
+python3 station_keeping_nav_test.py --mode yaw
+```
+
+ログファイルはモード名を含むファイル名で自動生成される：
+
+```
+robot_log_4dir_20250324120000.csv
+robot_log_8dir_20250324120000.csv
+robot_log_yaw_20250324120000.csv
 ```
 
 ---
