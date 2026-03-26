@@ -121,6 +121,8 @@ def update_channels():
 def set_surge_yaw(surge, yaw):
     rc5 = int(NEU + surge * PWM_RANGE)
     rc4 = int(NEU + yaw   * PWM_RANGE)
+    print("rc5: ", rc5)
+    print("rc4: ", rc4)
     target['rc5'] = clamp(rc5)
     target['rc4'] = clamp(rc4)
 
